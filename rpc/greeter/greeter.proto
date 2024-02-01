@@ -1,7 +1,7 @@
 syntax = "proto3";
-package trpc.echo;
+package trpc.greeter;
 
-option go_package = "proto/rpc/echo";
+option go_package = "rpc/greeter";
 
 // HelloRequest is hello request.
 message HelloRequest {
@@ -16,8 +16,8 @@ message HelloResponse {
   int64  timestamp_msec = 4;
 }
 
-// HelloWorldService handles hello request and echo message.
-service HelloWorld {
+// Greeter handles hello request and echo message.
+service Greeter {
   // Hello says hello.
   rpc Hello(HelloRequest) returns (HelloResponse);
 }
