@@ -72,3 +72,28 @@ curl -i    http://127.0.0.1:8002/demo.account.User/GetAccountByUserName    -H 'C
 
 --------------
 ## 第三部分 添加插件
+给第一个greeter项目添加一个配置插件, 一般项目启动后一些账号密码是放到配置文件中的,我们需要在项目启动时加载
+配置文件信息到全局变量，之后在调用中使用。
+这里参考: https://git.woa.com/trpc-go/trpc-go/blob/master/examples/features/plugin/custom_plugin.go 实现
+步骤：
+```azure
+1. 定义config及自定义插件 [在greeter项目添加conf] 
+2. 在main.go中引入包
+3. 在yaml中添加自定义配置
+    
+验证:
+go run main.go -conf trpc_go.yaml      
+curl -i "http://127.0.0.1:8000/trpc.greeter.Greeter/Hello?greeting=Morning"
+```
+
+同理,添加日志插件
+参考: https://git.woa.com/trpc-go/trpc-go/blob/master/examples/features/log/server/trpc_go.yaml
+```azure
+1. 在yaml中添加日志配置
+2. 日志包引用了即可。这个内部的init已封装了zap日志实现了，不需要我们自己开发
+```
+
+同理,测试了下yaml文件中的global全局变量,这个可以用来获取服务的全局信息: 测试正式环境。
+
+--------------
+## 第四部分 添加filter
