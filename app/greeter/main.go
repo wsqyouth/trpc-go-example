@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"time"
-	"trpc-go-example/rpc/greeter"
+	"trpc-go-example/proto/greeter"
 
 	"trpc.group/trpc-go/trpc-go"
 )

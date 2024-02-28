@@ -6,6 +6,7 @@ PB_FILES = $(shell find . -name '*.proto')
 PB_DIRS = $(sort $(dir $(PB_FILES)))
 PB_GO_FILES = $(shell find . -name '*.pb.go')
 PB_DIR_TGTS = $(addprefix _PB, $(PB_DIRS))
+WORK_DIR = $(shell pwd)
 
 .PHONY: all
 all: $(SERVERS)
@@ -37,13 +38,6 @@ cover:
 	go tool cover -html=tmp_coverage.out
 	if [ -f "tmp_coverage.out" ]; then rm tmp_coverage.out; fi
 
-.PHONY: convey
-convey:
-	sudo goconvey
-
-.PHONY: check
-check:	build test fmt lint
-
 # ======== protobuf 文件编译支持 ========
 
 # pb 编译规则
@@ -58,22 +52,21 @@ $(PB_DIR_TGTS):
 		cd $$dir; rm -rf mock; \
 		export PATH=$(PATH); \
 		rm -f *.pb.go; rm -f *.trpc.go; \
-		find . -name '*.proto' | xargs -I DD trpc create -f --protofile=DD --protocol=trpc --rpconly --nogomod --alias --mock=false; \
+		find . -name '*.proto' | xargs -I DD \
+			trpc create -f --protofile=DD --protocol=trpc --rpconly --nogomod --alias --mock=false --protodir=$(WORK_DIR)/proto; \
 		ls *.trpc.go | xargs -I DD mockgen -source=DD -destination=mock/DD -package=mock ; \
 		find `pwd` -name '*.pb.go'; \
-		sed -i 's/,omitempty//g' *.go; \
-		go mod tidy; \
 	done
 
-_PROTOC_PKG_URL=https://github.com/protocolbuffers/protobuf/releases/download/v25.1/protoc-25.1-linux-x86_64.zip
+_PROTOC_PKG_URL=https://github.com/protocolbuffers/protobuf/releases/download/v25.1/protoc-25.2-linux-x86_64.zip
 
 # installpb 用于在设备上安装 protobuf 编译器, 仅适用于 Linux 环境。
 # 如果环境 OK 那么不用执行
-.PHONY: installpb installtrpc
+.PHONY: installpb
 installpb:
 	wget $(_PROTOC_PKG_URL)
 	7z x $(notdir $(_PROTOC_PKG_URL)) -o/usr/local -y
-	rm -r $(notdir $(_PROTOC_PKG_URL))*
+	rm -f $(notdir $(_PROTOC_PKG_URL))*
 	chmod +x /usr/local/bin/protoc
 	@echo ---- $@ done ----
 	@protoc --version | xargs echo "Protobuf version:"
@@ -81,7 +74,6 @@ installpb:
 .PHONY: installtrpc
 installtrpc:
 	go install trpc.group/trpc-go/trpc-cmdline/trpc@latest
-	go get -u github.com/envoyproxy/protoc-gen-validate
 	@echo ---- $@ done ----
 	@trpc version | xargs echo "TRPC version:"
 
@@ -100,10 +92,11 @@ endif
 gogenerate: mockinstall $(GO_GENERATE_DIRS)
 	@go mod tidy
 
-.PHONY: mockinstall
-mockinstall:
+.PHONY: installmock
+installmock:
 	go install go.uber.org/mock/mockgen@latest
-	@mockgen -version | xargs echo mockgen version:
+	@echo ---- $@ done ----
+	@mockgen -version | xargs echo "mockgen version:"
 
 .PHONY: $(GO_GENERATE_DIRS)
 $(GO_GENERATE_DIRS):

@@ -1,0 +1,27 @@
+syntax = "proto3";
+package demo.httpauth;
+
+option go_package = "trpc-go-example/proto/httpauth";
+
+import "common/common.proto";
+
+message LoginRequest {
+  common.Metadata metadata = 1;
+  string username      = 2;
+  string password_hash = 3;
+}
+
+message LoginResponse {
+  int32  err_code = 1;
+  string err_msg  = 2;
+  Data   data     = 3;
+
+  message Data {
+    string id_ticket = 1;
+  }
+}
+
+// Auth 提供 HTTP 认证接口
+service Auth {
+  rpc Login(LoginRequest) returns (LoginResponse); // @alias=/demo/auth/Login
+}
