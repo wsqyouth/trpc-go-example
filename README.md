@@ -2,7 +2,7 @@
 对trpc-go进行实战
 参考文章: https://cloud.tencent.com/developer/article/2384591
 --------------
-
+## 第一部分
 ### 一、环境安装
 需要安装trpc-cmdline项目里的readme相关文件，主要包括:
 ```azure
@@ -57,7 +57,7 @@ protoc -I . -I ../ --go_out=. *.proto
 项目架构其实设计的不怎么好, 后续再优化，第一阶段是运行项目成功。
 步骤:
 ```azure
-1. 定义proto文件, `make pb`生成
+1. 定义proto文件, make pb生成
 2. 写user server服务代码,然后将yaml中定义为http protocol，用curl测试：
 curl -i    http://127.0.0.1:8002/demo.account.User/GetAccountByUserName    -H 'Content-Type: application/json'   -H 'cache-control: no-cache'    -H 'X-Client-Id: 1111655025'   -d '{"username":"benben4652"}'
 3. 将server服务的yaml 中定义为trpc protocol服务启动
@@ -70,3 +70,5 @@ curl -i    http://127.0.0.1:8002/demo.account.User/GetAccountByUserName    -H 'C
     curl '127.0.0.1:8001/demo/auth/Login?username=coopers'
 ```
 
+--------------
+## 第三部分 添加插件
