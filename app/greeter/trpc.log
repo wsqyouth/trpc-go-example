@@ -22,3 +22,27 @@
 {"L":"INFO","T":"2024-02-28 20:50:23.778","C":"server/service.go:529","M":"process:22310, http service:trpc.greeter, closing ..."}
 {"L":"INFO","T":"2024-02-28 20:50:23.780","C":"admin/admin.go:192","M":"process:22310, admin server, closed"}
 {"L":"INFO","T":"2024-02-28 20:50:25.581","C":"server/service.go:549","M":"process:22310, http service:trpc.greeter, closed"}
+{"L":"INFO","T":"2024-02-28 21:19:19.011","C":"server/service.go:167","M":"process:34193, http service:trpc.greeter launch success, tcp:127.0.0.1:8000, serving ..."}
+{"L":"INFO","T":"2024-02-28 21:20:09.623","C":"admin/admin.go:192","M":"process:34193, admin server, closed"}
+{"L":"INFO","T":"2024-02-28 21:20:09.623","C":"server/service.go:529","M":"process:34193, http service:trpc.greeter, closing ..."}
+{"L":"INFO","T":"2024-02-28 21:20:11.424","C":"server/service.go:549","M":"process:34193, http service:trpc.greeter, closed"}
+{"L":"INFO","T":"2024-02-28 21:21:33.103","C":"server/service.go:167","M":"process:35085, http service:trpc.greeter launch success, tcp:127.0.0.1:8000, serving ..."}
+{"L":"INFO","T":"2024-02-28 21:21:44.513","C":"filter/server_filter.go:16","M":"server filter start %strpc.GetMetaData(ctx, shared.AuthKey)"}
+{"L":"INFO","T":"2024-02-28 21:21:44.513","C":"greeter/main.go:27","M":"info msg:greeting:\"Morning\""}
+{"L":"WARN","T":"2024-02-28 21:21:44.513","C":"greeter/main.go:28","M":"warn msg:greeting:\"Morning\""}
+{"L":"ERROR","T":"2024-02-28 21:21:44.513","C":"greeter/main.go:29","M":"error msg:greeting:\"Morning\""}
+{"L":"WARN","T":"2024-02-28 21:21:44.513","C":"greeter/main.go:40","M":"globalConf: &{Global:{Namespace:development EnvName:test ContainerName: LocalIP:127.0.0.1 EnableSet:N FullSetName: ReadBufferSize:0x14000011c88} Server:{App: Server: BinPath: DataPath: ConfPath: Admin:{IP: Nic: Port:0 ReadTimeout:0 WriteTimeout:0 EnableTLS:false RPCZ:<nil>} Transport: Network:tcp Protocol:trpc Filter:[server_filter] StreamFilter:[] Service:[0x14000294a20] CloseWaitTime:0 MaxCloseWaitTime:0 Timeout:0} Client:{Network:tcp Protocol:trpc Filter:[] StreamFilter:[] Namespace:development Transport: Timeout:0 Discovery: ServiceRouter: Loadbalance: Circuitbreaker: Service:[]} Plugins:map[demoapp:map[democonfig:{Kind:4 Style:0 Tag:!!map Value: Anchor: Alias:<nil> Content:[0x140002a50e0 0x140002a5180 0x140002a5220 0x140002a52c0] HeadComment: LineComment: FootComment: Line:21 Column:7}] log:map[default:{Kind:2 Style:0 Tag:!!seq Value: Anchor: Alias:<nil> Content:[0x140002a59a0 0x140002a5cc0] HeadComment: LineComment: FootComment: Line:28 Column:7}]]}"}
+{"L":"INFO","T":"2024-02-28 21:21:44.514","C":"filter/server_filter.go:24","M":"server filter end"}
+{"L":"INFO","T":"2024-02-29 10:33:31.637","C":"server/service.go:529","M":"process:35085, http service:trpc.greeter, closing ..."}
+{"L":"INFO","T":"2024-02-29 10:33:31.638","C":"admin/admin.go:192","M":"process:35085, admin server, closed"}
+{"L":"INFO","T":"2024-02-29 10:33:33.440","C":"server/service.go:549","M":"process:35085, http service:trpc.greeter, closed"}
+{"L":"INFO","T":"2024-02-29 10:33:38.659","C":"server/service.go:167","M":"process:67635, http service:trpc.greeter launch success, tcp:127.0.0.1:8000, serving ..."}
+{"L":"INFO","T":"2024-02-29 10:33:45.268","C":"filter/server_filter.go:16","M":"server filter start %strpc.GetMetaData(ctx, shared.AuthKey)"}
+{"L":"INFO","T":"2024-02-29 10:33:45.269","C":"greeter/main.go:28","M":"info msg:greeting:\"Morning\""}
+{"L":"WARN","T":"2024-02-29 10:33:45.269","C":"greeter/main.go:29","M":"warn msg:greeting:\"Morning\""}
+{"L":"ERROR","T":"2024-02-29 10:33:45.269","C":"greeter/main.go:30","M":"error msg:greeting:\"Morning\""}
+{"L":"WARN","T":"2024-02-29 10:33:45.269","C":"greeter/main.go:41","M":"globalConf: &{Global:{Namespace:development EnvName:test ContainerName: LocalIP:127.0.0.1 EnableSet:N FullSetName: ReadBufferSize:0x14000121c38} Server:{App: Server: BinPath: DataPath: ConfPath: Admin:{IP: Nic: Port:0 ReadTimeout:0 WriteTimeout:0 EnableTLS:false RPCZ:<nil>} Transport: Network:tcp Protocol:trpc Filter:[server_filter] StreamFilter:[] Service:[0x14000238b40] CloseWaitTime:0 MaxCloseWaitTime:0 Timeout:0} Client:{Network:tcp Protocol:trpc Filter:[] StreamFilter:[] Namespace:development Transport: Timeout:0 Discovery: ServiceRouter: Loadbalance: Circuitbreaker: Service:[]} Plugins:map[demoapp:map[democonfig:{Kind:4 Style:0 Tag:!!map Value: Anchor: Alias:<nil> Content:[0x1400024d180 0x1400024d220 0x1400024d2c0 0x1400024d360] HeadComment: LineComment: FootComment: Line:21 Column:7}] log:map[default:{Kind:2 Style:0 Tag:!!seq Value: Anchor: Alias:<nil> Content:[0x1400024da40 0x1400024dd60] HeadComment: LineComment: FootComment: Line:28 Column:7}]]}"}
+{"L":"INFO","T":"2024-02-29 10:33:45.269","C":"filter/server_filter.go:24","M":"server filter end"}
+{"L":"INFO","T":"2024-02-29 10:33:49.907","C":"server/service.go:529","M":"process:67635, http service:trpc.greeter, closing ..."}
+{"L":"INFO","T":"2024-02-29 10:33:49.907","C":"admin/admin.go:192","M":"process:67635, admin server, closed"}
+{"L":"INFO","T":"2024-02-29 10:33:51.708","C":"server/service.go:549","M":"process:67635, http service:trpc.greeter, closed"}

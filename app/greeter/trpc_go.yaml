@@ -3,6 +3,8 @@ global:                             # global config.
   env_name: test                    # environment name, names of multiple environments in informal settings.
 
 server:
+  filter: # 针对所有service处理函数前后的拦截器列表
+    - server_filter
   service:
     - name: trpc.greeter
 #      nic: eth0
@@ -26,7 +28,7 @@ plugins:                                          #插件配置
       - writer: console                            # console standard output, default setting.
         level: warn                                # log level of standard output.
       - writer: file                               # local file logging.
-        level: info                               # log level of local file rolling logs.
+        level: info                                # log level of local file rolling logs.
         formatter: json                            # log format for standard output.
         writer_config:
           filename: ./trpc.log                     # storage path of rolling continuous log files.

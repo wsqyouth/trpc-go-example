@@ -4,8 +4,10 @@ import (
 	"context"
 	"fmt"
 	"time"
+	_ "trpc-go-example/app/greeter/filter"
 	"trpc-go-example/proto/greeter"
 	"trpc.group/trpc-go/trpc-go"
+	"trpc.group/trpc-go/trpc-go/codec"
 	"trpc.group/trpc-go/trpc-go/log"
 	// 加载插件包
 	"trpc-go-example/app/greeter/config"
@@ -37,5 +39,12 @@ func (greeterImpl) Hello(ctx context.Context, req *greeter.HelloRequest) (*greet
 	// 测试全局变量
 	globalConf := trpc.GlobalConfig()
 	log.Warnf("globalConf: %+v", globalConf)
+
+	// 测试获取metadata
+	msg := codec.Message(ctx)
+	md := msg.ServerMetaData()
+	for k, v := range md {
+		log.Debugf("get metadata key : %s, value : %s", k, string(v))
+	}
 	return rsp, nil
 }
