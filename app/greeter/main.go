@@ -8,8 +8,9 @@ import (
 	"trpc-go-example/proto/greeter"
 	"trpc.group/trpc-go/trpc-go"
 	"trpc.group/trpc-go/trpc-go/codec"
+	// 日志
 	"trpc.group/trpc-go/trpc-go/log"
-	// 加载插件包
+	// 加载插件
 	"trpc-go-example/app/greeter/config"
 )
 
@@ -36,7 +37,7 @@ func (greeterImpl) Hello(ctx context.Context, req *greeter.HelloRequest) (*greet
 	config.Record() // 通过包访问公共函数
 	log.Debugf("SayHi config: %+v", config.DefaultAppConfig)
 
-	// 测试全局变量
+	// 测试读取config全局变量
 	globalConf := trpc.GlobalConfig()
 	log.Warnf("globalConf: %+v", globalConf)
 

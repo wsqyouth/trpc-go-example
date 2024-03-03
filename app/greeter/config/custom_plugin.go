@@ -21,6 +21,7 @@ type AppConfig struct {
 	config CustomConfig
 }
 
+// CustomConfig 自定义配置
 type CustomConfig struct {
 	Test    string `yaml:"test"`
 	TestObj struct {
