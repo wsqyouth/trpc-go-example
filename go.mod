@@ -4,9 +4,9 @@ go 1.21.6
 
 require (
 	go.uber.org/mock v0.4.0
-	google.golang.org/protobuf v1.32.0
+	google.golang.org/protobuf v1.33.0
 	trpc.group/trpc-go/trpc-database/mysql v1.0.0
-	trpc.group/trpc-go/trpc-go v1.0.2
+	trpc.group/trpc-go/trpc-go v1.0.3
 )
 
 require (
@@ -41,7 +41,7 @@ require (
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	trpc.group/trpc-go/tnet v1.0.0 // indirect
+	trpc.group/trpc-go/tnet v1.0.1 // indirect
 	trpc.group/trpc-go/trpc-selector-dsn v1.0.0 // indirect
 	trpc.group/trpc-go/trpc-utils v1.0.0 // indirect
 	trpc.group/trpc/trpc-protocol/pb/go/trpc v1.0.0 // indirect

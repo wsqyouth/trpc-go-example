@@ -101,3 +101,98 @@ curl -i "http://127.0.0.1:8000/trpc.greeter.Greeter/Hello?greeting=Morning"
 ```azure
 代码见greeter项目
 ```
+
+--------------
+### 第五部分 依赖升级 & 完整测试步骤（2026-03-30）
+
+#### 5.1 升级 trpc-go 依赖版本
+
+编辑 `go.mod`，将 `trpc-go` 版本号改为最新 tag：
+
+```diff
+- trpc.group/trpc-go/trpc-go v1.0.2
++ trpc.group/trpc-go/trpc-go v1.0.3
+```
+
+> ⚠️ **国内网络注意**：默认 `GOPROXY=https://proxy.golang.org` 在国内会超时，需要切换为国内镜像再执行 tidy：
+
+```bash
+# 临时使用国内镜像（当次命令生效）
+GOPROXY=https://goproxy.cn,direct go mod tidy
+
+# 或永久设置（推荐）
+go env -w GOPROXY=https://goproxy.cn,direct
+go mod tidy
+```
+
+#### 5.2 编译全部服务
+
+```bash
+# 在项目根目录执行，编译 greeter / http-auth-server / user 三个服务
+# 产物输出到 bin/ 目录
+GOPROXY=https://goproxy.cn,direct make
+```
+
+预期输出：
+```
+Now build greeter ... Done
+Now build http-auth-server ... Done
+Now build user ... Done
+```
+
+#### 5.3 测试 greeter 服务
+
+**Step 1：启动服务**
+
+```bash
+cd app/greeter
+go run . -conf trpc_go.yaml
+# 或使用编译好的二进制
+# ../../bin/greeter -conf trpc_go.yaml
+```
+
+**Step 2：GET 请求测试**
+
+```bash
+curl -i "http://127.0.0.1:8000/trpc.greeter.Greeter/Hello?greeting=Morning"
+```
+
+预期响应：
+```json
+{"err_code":0, "err_msg":"", "response":"Morning to you, too", "timestamp_msec":"..."}
+```
+
+**Step 3：POST 请求测试**
+
+```bash
+curl http://127.0.0.1:8000/trpc.greeter.Greeter/Hello \
+  --header 'Content-Type:application/json' \
+  -d '{"greeting":"Good afternoon"}'
+```
+
+预期响应：
+```json
+{"err_code":0, "err_msg":"", "response":"Good afternoon to you, too", "timestamp_msec":"..."}
+```
+
+#### 5.4 测试完整链路（user + http-auth-server）
+
+**Step 1：启动 user 服务（trpc protocol）**
+
+```bash
+cd app/user
+go run . -conf conf/trpc_go.yaml
+```
+
+**Step 2：启动 http-auth-server 服务**
+
+```bash
+cd app/http-auth-server
+go run . -conf conf/trpc_go.yaml
+```
+
+**Step 3：串联测试**
+
+```bash
+curl '127.0.0.1:8001/demo/auth/Login?username=coopers'
+```
